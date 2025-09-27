@@ -49,6 +49,14 @@ ER-модель д.б. представлена в виде ER-диаграмм�
 - заполнить все таблицы адекватной информацией (не меньше 10 записей в таблицах, наличие примеров для связей типа 1:M )
 
 
+<p align="center">
+  <a href="#lab1"><img alt="lab1" src="https://img.shields.io/badge/Лаб1-2E86AB"></a> 
+  <a href="#lab2"><img alt="lab2" src="https://img.shields.io/badge/Лаб2-A23B72"></a> 
+  <a href="#lab3"><img alt="lab3" src="https://img.shields.io/badge/Лаб3-F18F01"></a> 
+  <a href="#lab4"><img alt="lab4" src="https://img.shields.io/badge/Лаб4-5B8C5A"></a> 
+</p>
+
+<a href="#lab1"><img alt="lab1" src="https://img.shields.io/badge/Lab1-FF6B6B-4ECDC4"></a>
 
 
 
