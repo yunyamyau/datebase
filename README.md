@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="#лабараторная-1"><img alt="lab1" src="https://img.shields.io/badge/Lab1-red"></a> 
-  <a href="#-lab2"><img alt="lab2" src="https://img.shields.io/badge/Lab2-red"></a> 
+  <a href="#лабараторная-2"><img alt="lab2" src="https://img.shields.io/badge/Lab2-red"></a> 
 </p>
 
 # <img src="https://github.com/user-attachments/assets/e080adec-6af7-4bd2-b232-d43cb37024ac" width="20" height="20"/> Лабараторная №1
