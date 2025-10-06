@@ -51,47 +51,47 @@ ER-модель д.б. представлена в виде ER-диаграмм�
 
 ```
 CREATE TABLE Дисциплина (
-    Дисциплина_ID INT PRIMARY KEY IDENTITY(1,1),
+    Дисциплина_ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Специальность (
-    Специальность_ID INT PRIMARY KEY IDENTITY(1,1),
+    Специальность_ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Тип_занятия (
-    Тип_занятия_ID INT PRIMARY KEY IDENTITY(1,1),
+    Тип_занятия_ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(8) NOT NULL CHECK (Название IN ('Лекция','Практика'))
 );
 
 CREATE TABLE Тип_отчётности (
-    Тип_отчётности_ID INT PRIMARY KEY IDENTITY(1,1),
+    Тип_отчётности_ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(7) NOT NULL CHECK (Название IN ('Зачёт','Экзамен'))
 );
 
 CREATE TABLE Преподаватель (
-    Преподаватель_ID INT PRIMARY KEY IDENTITY(1,1),
+    Преподаватель_ID INT PRIMARY KEY IDENTITY,
     ФИО NVARCHAR(150) NOT NULL,
-    Обязательные_часы_лекции INT NOT NULL,
-    Обязательные_часы_практика INT NOT NULL
+    [Обязательные часы(лекции)] INT NOT NULL,
+    [Обязательные часы(практика)] INT NOT NULL
 );
 
 CREATE TABLE Учебный_план (
-    Учебный_план_ID INT PRIMARY KEY IDENTITY(1,1),
+    Учебный_план_ID INT PRIMARY KEY IDENTITY,
     Курс INT NOT NULL,
-    Семестр INT NOT NULL CHECK (Семестр IN (1,2)), 
-    Учебный_год NVARCHAR(9) NOT NULL,
-    Часы_лекций INT NOT NULL,
-    Часы_практик INT NOT NULL,
+    Семестр INT NOT NULL CHECK (Семестр IN (1,2)),
+    [Учебный год] NVARCHAR(9) NOT NULL,
+    [Часы лекций] INT NOT NULL,
+    [Часы практик] INT NOT NULL,
     Специальность_ID INT NOT NULL FOREIGN KEY REFERENCES Специальность(Специальность_ID),
     Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(Дисциплина_ID),
     Тип_отчётности_ID INT NOT NULL FOREIGN KEY REFERENCES Тип_отчётности(Тип_отчётности_ID)
 );
 
 CREATE TABLE Нагрузка (
-    Нагрузка_ID INT PRIMARY KEY IDENTITY(1,1),
-    Назначенные_часы INT NOT NULL,
+    Нагрузка_ID INT PRIMARY KEY IDENTITY,
+    [Назначенные часы] INT NOT NULL,
     Учебный_план_ID INT NOT NULL FOREIGN KEY REFERENCES Учебный_план(Учебный_план_ID),
     Преподаватель_ID INT NOT NULL FOREIGN KEY REFERENCES Преподаватель(Преподаватель_ID),
     Тип_занятия_ID INT NOT NULL FOREIGN KEY REFERENCES Тип_занятия(Тип_занятия_ID)
@@ -108,5 +108,4 @@ CREATE TABLE Преподаватель_Дисциплина (
     Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(Дисциплина_ID),
     PRIMARY KEY (Преподаватель_ID, Дисциплина_ID)
 );
-
 ```
