@@ -51,67 +51,67 @@ ER-модель д.б. представлена в виде ER-диаграмм�
 
 ```
 CREATE TABLE Дисциплина (
-    Дисциплина_ID INT PRIMARY KEY IDENTITY,
+    ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Специальность (
-    Специальность_ID INT PRIMARY KEY IDENTITY,
+    ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Тип_занятия (
-    Тип_занятия_ID INT PRIMARY KEY IDENTITY,
+    ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(8) NOT NULL CHECK (Название IN ('Лекция','Практика'))
 );
 
 CREATE TABLE Тип_отчётности (
-    Тип_отчётности_ID INT PRIMARY KEY IDENTITY,
+    ID INT PRIMARY KEY IDENTITY,
     Название NVARCHAR(7) NOT NULL CHECK (Название IN ('Зачёт','Экзамен'))
 );
 
 CREATE TABLE Преподаватель (
-    Преподаватель_ID INT PRIMARY KEY IDENTITY,
+    ID INT PRIMARY KEY IDENTITY,
     ФИО NVARCHAR(150) NOT NULL,
     [Обязательные часы(лекции)] INT NOT NULL,
     [Обязательные часы(практика)] INT NOT NULL
 );
 
 CREATE TABLE Учебный_план (
-    Учебный_план_ID INT PRIMARY KEY IDENTITY,
-    Курс INT NOT NULL,
-    Семестр INT NOT NULL CHECK (Семестр IN (1,2)),
+    ID INT PRIMARY KEY IDENTITY,
+    Курс TINYINT NOT NULL,
+    Семестр TINYINT NOT NULL CHECK (Семестр IN (1,2)),
     [Учебный год] NVARCHAR(9) NOT NULL,
-    [Часы лекций] INT NOT NULL,
-    [Часы практик] INT NOT NULL,
-    Специальность_ID INT NOT NULL FOREIGN KEY REFERENCES Специальность(Специальность_ID),
-    Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(Дисциплина_ID),
-    Тип_отчётности_ID INT NOT NULL FOREIGN KEY REFERENCES Тип_отчётности(Тип_отчётности_ID)
+    [Часы лекций] TINYINT NOT NULL,
+    [Часы практик] TINYINT NOT NULL,
+    Специальность_ID INT NOT NULL FOREIGN KEY REFERENCES Специальность(ID),
+    Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(ID),
+    Тип_отчётности_ID INT NOT NULL FOREIGN KEY REFERENCES Тип_отчётности(ID)
 );
 
 CREATE TABLE Нагрузка (
-    Нагрузка_ID INT PRIMARY KEY IDENTITY,
-    [Назначенные часы] INT NOT NULL,
-    Учебный_план_ID INT NOT NULL FOREIGN KEY REFERENCES Учебный_план(Учебный_план_ID),
-    Преподаватель_ID INT NOT NULL FOREIGN KEY REFERENCES Преподаватель(Преподаватель_ID),
-    Тип_занятия_ID INT NOT NULL FOREIGN KEY REFERENCES Тип_занятия(Тип_занятия_ID)
+    ID INT PRIMARY KEY IDENTITY,
+    [Назначенные часы] TINYINT NOT NULL,
+    Учебный_план_ID INT NOT NULL FOREIGN KEY REFERENCES Учебный_план(ID),
+    Преподаватель_ID INT NOT NULL FOREIGN KEY REFERENCES Преподаватель(ID),
+    Тип_занятия_ID INT NOT NULL FOREIGN KEY REFERENCES Тип_занятия(ID)
 );
 
 CREATE TABLE Дисциплина_Специальность (
-    Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(Дисциплина_ID),
-    Специальность_ID INT NOT NULL FOREIGN KEY REFERENCES Специальность(Специальность_ID),
+    Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(ID),
+    Специальность_ID INT NOT NULL FOREIGN KEY REFERENCES Специальность(ID),
     PRIMARY KEY (Дисциплина_ID, Специальность_ID)
 );
 
 CREATE TABLE Преподаватель_Дисциплина (
-    Преподаватель_ID INT NOT NULL FOREIGN KEY REFERENCES Преподаватель(Преподаватель_ID),
-    Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(Дисциплина_ID),
+    Преподаватель_ID INT NOT NULL FOREIGN KEY REFERENCES Преподаватель(ID),
+    Дисциплина_ID INT NOT NULL FOREIGN KEY REFERENCES Дисциплина(ID),
     PRIMARY KEY (Преподаватель_ID, Дисциплина_ID)
 );
 ```
 
 #### Диаграмма:
-![Диаграмма](/pic/chart.png)
+![Диаграмма](/pic/диаграмма.png)
 
 #### Заполнение таблиц:
 ```
