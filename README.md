@@ -73,8 +73,8 @@ CREATE TABLE Тип_отчётности (
 CREATE TABLE Преподаватель (
     ID INT PRIMARY KEY IDENTITY,
     ФИО NVARCHAR(150) NOT NULL,
-    [Обязательные часы(лекции)] INT NOT NULL,
-    [Обязательные часы(практика)] INT NOT NULL
+    [Обязательные часы(лекции)] TINYINT NOT NULL,
+    [Обязательные часы(практика)] TINYINT NOT NULL
 );
 
 CREATE TABLE Учебный_план (
