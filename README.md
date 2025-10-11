@@ -229,17 +229,28 @@ INSERT INTO Тип_занятия (Название) VALUES ('Лекция'), ('
 
 Часть 1
 
-<mark style="background-color: #ffd6e7; padding: 4px 8px; border-radius: 4px;">
-**Цель:** изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
+<mark style="background-color: ##db7093; padding: 4px 8px; border-radius: 4px;">
+Цель: изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
 </mark>
 
-<div style="background-color: #ffebee; border: 1px solid #f8bbd0; padding: 10px 15px; border-radius: 6px; margin: 10px 0;">
-🎯 <strong>Цель:</strong> изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
-</div>
+🎯 
 
-<div style="background-color: #ff69b4; color: white; padding: 10px 15px; border-radius: 5px; margin: 10px 0;">
-<strong>Цель:</strong> изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
-</div>
+
+<mark style="background-color: #fff0f5; padding: 4px 8px; border-radius: 4px;">
+Цель: изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
+</mark>
+
+
+<mark style="background-color: #ff69b4; padding: 4px 8px; border-radius: 4px;">
+Цель: изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
+</mark>
+
+
+<mark style="background-color: #ffb6c1; padding: 4px 8px; border-radius: 4px;">
+Цель: изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
+</mark>
+
+
 
 
 Задания и краткое описание работы:
