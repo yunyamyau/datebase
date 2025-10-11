@@ -227,10 +227,10 @@ INSERT INTO Тип_занятия (Название) VALUES ('Лекция'), ('
 # <img src="https://github.com/user-attachments/assets/e080adec-6af7-4bd2-b232-d43cb37024ac" width="20" height="20"/> Лабараторная №3
 [Назад](#content)
 
-<span style="background-color: #ffeb3b; padding: 2px 6px; border-radius: 3px;">Желтый фон</span>
-<span style="background-color: #e3f2fd; padding: 2px 6px;">Голубой фон</span>
 Часть 1
-Цель: изучить конструкции языка SQL для манипулирования данными в СУБД  MSSQL.
+<mark style="background-color: #ffd6e7; padding: 4px 8px; border-radius: 4px;">
+**Цель:** изучить конструкции языка SQL для манипулирования данными в СУБД MSSQL.
+</mark>
 Задания и краткое описание работы:
 1. Выборка из одной таблицы.
 1.1 Выбрать из произвольной таблицы данные и отсортировать их по двум  произвольным имеющимся в таблице признакам (разные направления сортировки).
