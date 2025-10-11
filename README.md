@@ -227,7 +227,7 @@ INSERT INTO Тип_занятия (Название) VALUES ('Лекция'), ('
 # <img src="https://github.com/user-attachments/assets/e080adec-6af7-4bd2-b232-d43cb37024ac" width="20" height="20"/> Лабараторная №3
 [Назад](#content)
 
-# Часть 1
+## Часть 1
 
 > Цель: изучить конструкции языка SQL для манипулирования данными в СУБД  MSSQL.
 
