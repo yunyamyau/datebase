@@ -227,9 +227,8 @@ INSERT INTO Тип_занятия (Название) VALUES ('Лекция'), ('
 # <img src="https://github.com/user-attachments/assets/e080adec-6af7-4bd2-b232-d43cb37024ac" width="20" height="20"/> Лабараторная №3
 [Назад](#content)
 
-<div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; border-radius: 5px;">
-⚠️ **Внимание**: Это предупреждающее сообщение
-</div>
+<span style="background-color: #ffeb3b; padding: 2px 6px; border-radius: 3px;">Желтый фон</span>
+<span style="background-color: #e3f2fd; padding: 2px 6px;">Голубой фон</span>
 Часть 1
 Цель: изучить конструкции языка SQL для манипулирования данными в СУБД  MSSQL.
 Задания и краткое описание работы:
