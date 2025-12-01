@@ -4,6 +4,7 @@
   <a href="#lab1"><img alt="lab1" src="https://img.shields.io/badge/Lab1-6B8E23"></a> 
   <a href="#lab2"><img alt="lab2" src="https://img.shields.io/badge/Lab2-6B8E23"></a> 
   <a href="#lab3"><img alt="lab3" src="https://img.shields.io/badge/Lab3-6B8E23"></a> 
+  <a href="#lab4"><img alt="lab4" src="https://img.shields.io/badge/Lab3-6B8E23"></a> 
 </p>
 
 <a id="lab1"></a>
@@ -231,5 +232,11 @@ INSERT INTO Тип_занятия (Название) VALUES ('Лекция'), ('
 📄 [Часть 1](./lab_3/3%20лаба%201%20часть.docx)
  
 📄 [Часть 2](./lab_3/3%20лаба%202%20часть.docx)
+
+
+<a id="lab4"></a>
+# Лабараторная №4
+[Назад](#content)
+
 
 
