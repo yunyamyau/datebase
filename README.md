@@ -7,9 +7,9 @@
   <a href="#lab4"><img alt="lab4" src="https://img.shields.io/badge/Lab4-586e14"></a> 
   <a href="#lab5"><img alt="lab5" src="https://img.shields.io/badge/Lab5-778c43"></a> 
   <a href="#lab6"><img alt="lab6" src="https://img.shields.io/badge/Lab6-96ac60"></a> 
+  <a href="#lab7"><img alt="lab7" src="https://img.shields.io/badge/Lab7-b7cd7f"></a> 
 </p>
-[//]: # (b7cd7f)
-<a id="lab1"></a>
+
 # Лабараторная №1
 [Назад](#content)
 <h3 align="center">
