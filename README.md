@@ -4,7 +4,7 @@
   <a href="#lab1"><img alt="lab1" src="https://img.shields.io/badge/Lab1-6B8E23"></a> 
   <a href="#lab2"><img alt="lab2" src="https://img.shields.io/badge/Lab2-6B8E23"></a> 
   <a href="#lab3"><img alt="lab3" src="https://img.shields.io/badge/Lab3-6B8E23"></a> 
-  <a href="#lab4"><img alt="lab4" src="https://img.shields.io/badge/Lab3-6B8E23"></a> 
+  <a href="#lab4"><img alt="lab4" src="https://img.shields.io/badge/Lab4-6B8E23"></a> 
 </p>
 
 <a id="lab1"></a>
