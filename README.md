@@ -479,7 +479,24 @@ ORDER BY s.Название, sp.Курс, d.Название
 ![модель](/pic/Снимок%20экрана%202026-01-12%20064825.png)
 ![модель](/pic/Снимок%20экрана%202026-01-12%20064832.png)
 
-
+```
+--  Для каждого преподавателя выдать дисциплины (лекции и практику отдельно)
+SELECT
+    t.ФИО,
+    ISNULL(STRING_AGG(CASE WHEN sp.Часы_лекций > 0 THEN d.Название END, ', '), '') AS Лекции,
+    ISNULL(STRING_AGG(CASE WHEN sp.Часы_практик > 0 THEN d.Название END, ', '), '') AS Практика
+FROM 
+    Graph_teacher t,
+    Graph_discipline d,
+    Graph_specialization s,
+    Graph_study_plan sp,
+    CAN_TEACH,
+    RELATED_TO_SPECIALTY,
+    INCLUDES_SPECIALTY
+WHERE MATCH(t-(CAN_TEACH)->d-(RELATED_TO_SPECIALTY)->s<-(INCLUDES_SPECIALTY)-sp)
+GROUP BY t.ФИО
+ORDER BY t.ФИО
+```
 
 
 
