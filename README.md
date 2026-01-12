@@ -406,3 +406,71 @@ JOIN Graph_study_plan sp ON EXISTS (
 );
 GO
 ```
+
+-- Для каждой дисциплины вывести преподавателей, которые могут ее вести
+SELECT
+    d.Название AS Дисциплина,
+    STRING_AGG(t.ФИО, ', ') AS Преподаватели
+FROM 
+    Graph_discipline d,
+    Graph_teacher t,
+    CAN_TEACH ct
+WHERE MATCH(t-(ct)->d)
+GROUP BY d.Название
+ORDER BY d.Название
+
+
+-- Найти преподавателей с максимальной нагрузкой по лекциям
+SELECT TOP 1 WITH TIES
+    t.ФИО,
+    SUM(l.Назначенные_часы) AS Общее_число_часов_лекций
+FROM 
+    Graph_teacher t,
+    Graph_load l,
+    Graph_lesson_type lt,
+    ASSIGNED_TO_TEACHER,
+    HAS_LESSON_TYPE
+WHERE MATCH(t<-(ASSIGNED_TO_TEACHER)-l-(HAS_LESSON_TYPE)->lt)
+    AND lt.Название = 'Лекция'
+GROUP BY t.ФИО
+ORDER BY SUM(l.Назначенные_часы) DESC
+
+
+-- Для каждой дисциплины и каждой специальности вывести количество лет
+SELECT
+    s.Название AS Специальность,
+    d.Название AS Дисциплина,
+    COUNT(DISTINCT sp.Учебный_год) * 0.5 AS Продолжительность_в_годах
+FROM 
+    Graph_discipline d,
+    Graph_specialization s,
+    Graph_study_plan sp,
+    RELATED_TO_SPECIALTY,
+    INCLUDES_SPECIALTY
+WHERE MATCH(d-(RELATED_TO_SPECIALTY)->s<-(INCLUDES_SPECIALTY)-sp)
+GROUP BY s.Название, d.Название
+ORDER BY s.Название, d.Название
+
+
+-- Найти дисциплины, по которым есть лекции, но нет практики
+SELECT DISTINCT
+    s.Название AS Специальность,
+    sp.Курс,
+    d.Название AS Дисциплина
+FROM 
+    Graph_discipline d,
+    Graph_specialization s,
+    Graph_study_plan sp,
+    RELATED_TO_SPECIALTY,
+    INCLUDES_SPECIALTY
+WHERE MATCH(d-(RELATED_TO_SPECIALTY)->s<-(INCLUDES_SPECIALTY)-sp)
+    AND sp.Часы_лекций > 0 
+    AND sp.Часы_практик = 0
+ORDER BY s.Название, sp.Курс, d.Название
+
+
+
+
+
+
+
