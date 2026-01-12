@@ -249,5 +249,53 @@ INSERT INTO Тип_занятия (Название) VALUES ('Лекция'), ('
 
 ![модель](/pic/dd6.png)
 
+```
+-- Узлы
+CREATE TABLE Graph_teacher (
+    ID INT PRIMARY KEY,
+    ФИО NVARCHAR(150) NOT NULL,
+    Обязательные_часы_лекции TINYINT NOT NULL,
+    Обязательные_часы_практика TINYINT NOT NULL
+) AS NODE;
+
+CREATE TABLE Graph_discipline (
+    ID INT PRIMARY KEY,
+    Название NVARCHAR(50) NOT NULL
+) AS NODE;
+
+CREATE TABLE Graph_specialization (
+    ID INT PRIMARY KEY,
+    Название NVARCHAR(50) NOT NULL
+) AS NODE;
+
+CREATE TABLE Graph_lesson_type (
+    ID INT PRIMARY KEY,
+    Название NVARCHAR(8) NOT NULL CHECK (Название IN ('Лекция','Практика'))
+) AS NODE;
+
+CREATE TABLE Graph_аssessment_type (
+    ID INT PRIMARY KEY,
+    Название NVARCHAR(7) NOT NULL CHECK (Название IN ('Зачёт','Экзамен'))
+) AS NODE;
+
+CREATE TABLE Graph_study_plan (
+    ID INT PRIMARY KEY,
+    Курс TINYINT NOT NULL,
+    Семестр TINYINT NOT NULL CHECK (Семестр IN (1,2)),
+    Учебный_год NVARCHAR(9) NOT NULL,
+    Часы_лекций TINYINT NOT NULL,
+    Часы_практик TINYINT NOT NULL
+) AS NODE;
+
+-- Рёбра 
+CREATE TABLE teaches AS EDGE;
+CREATE TABLE has_discipline AS EDGE; 
+CREATE TABLE has_load AS EDGE; 
+CREATE TABLE has_lesson_type AS EDGE; 
+CREATE TABLE has_assessment_type AS EDGE; 
+CREATE TABLE belongs_to_specialization AS EDGE; 
+CREATE TABLE belongs_to_discipline AS EDGE; 
+CREATE TABLE can_teach AS EDGE;
+```
 
 
