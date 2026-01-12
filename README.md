@@ -497,6 +497,6 @@ WHERE MATCH(t-(CAN_TEACH)->d-(RELATED_TO_SPECIALTY)->s<-(INCLUDES_SPECIALTY)-sp)
 GROUP BY t.ФИО
 ORDER BY t.ФИО
 ```
-
+![модель](/pic/Снимок%20экрана%202026-01-12%20071630.png)
 
 
