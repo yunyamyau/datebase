@@ -250,36 +250,36 @@ INSERT INTO Тип_занятия (Название) VALUES ('Лекция'), ('
 ![модель](/pic/dd6.png)
 
 ```
--- Узлы
+
 CREATE TABLE Graph_teacher (
-    ID INT PRIMARY KEY,
+    id INT PRIMARY KEY,
     ФИО NVARCHAR(150) NOT NULL,
     Обязательные_часы_лекции TINYINT NOT NULL,
     Обязательные_часы_практика TINYINT NOT NULL
 ) AS NODE;
 
 CREATE TABLE Graph_discipline (
-    ID INT PRIMARY KEY,
+    id INT PRIMARY KEY,
     Название NVARCHAR(50) NOT NULL
 ) AS NODE;
 
 CREATE TABLE Graph_specialization (
-    ID INT PRIMARY KEY,
+    id INT PRIMARY KEY,
     Название NVARCHAR(50) NOT NULL
 ) AS NODE;
 
+CREATE TABLE Graph_load (
+    id INT PRIMARY KEY,
+    Назначенные_часы TINYINT NOT NULL
+) AS NODE;
+
 CREATE TABLE Graph_lesson_type (
-    ID INT PRIMARY KEY,
+    id INT PRIMARY KEY,
     Название NVARCHAR(8) NOT NULL CHECK (Название IN ('Лекция','Практика'))
 ) AS NODE;
 
-CREATE TABLE Graph_аssessment_type (
-    ID INT PRIMARY KEY,
-    Название NVARCHAR(7) NOT NULL CHECK (Название IN ('Зачёт','Экзамен'))
-) AS NODE;
-
 CREATE TABLE Graph_study_plan (
-    ID INT PRIMARY KEY,
+    id INT PRIMARY KEY,
     Курс TINYINT NOT NULL,
     Семестр TINYINT NOT NULL CHECK (Семестр IN (1,2)),
     Учебный_год NVARCHAR(9) NOT NULL,
@@ -287,15 +287,122 @@ CREATE TABLE Graph_study_plan (
     Часы_практик TINYINT NOT NULL
 ) AS NODE;
 
--- Рёбра 
-CREATE TABLE teaches AS EDGE;
-CREATE TABLE has_discipline AS EDGE; 
-CREATE TABLE has_load AS EDGE; 
-CREATE TABLE has_lesson_type AS EDGE; 
-CREATE TABLE has_assessment_type AS EDGE; 
-CREATE TABLE belongs_to_specialization AS EDGE; 
-CREATE TABLE belongs_to_discipline AS EDGE; 
-CREATE TABLE can_teach AS EDGE;
+CREATE TABLE Graph_assessment_type (
+    id INT PRIMARY KEY,
+    Название NVARCHAR(7) NOT NULL CHECK (Название IN ('Зачёт','Экзамен'))
+) AS NODE;
+
+
+CREATE TABLE CAN_TEACH AS EDGE;
+CREATE TABLE RELATED_TO_SPECIALTY AS EDGE;
+CREATE TABLE ASSIGNED_TO_TEACHER AS EDGE;
+CREATE TABLE CONTAINS_DISCIPLINE AS EDGE;
+CREATE TABLE INCLUDES_SPECIALTY AS EDGE;
+CREATE TABLE HAS_LESSON_TYPE AS EDGE;
+CREATE TABLE HAS_ASSESSMENT_TYPE AS EDGE;
+CREATE TABLE BELONGS_TO_STUDY_PLAN AS EDGE;
+
+
+INSERT INTO Graph_teacher (id, ФИО, Обязательные_часы_лекции, Обязательные_часы_практика)
+SELECT ID, ФИО, [Обязательные часы(лекции)], [Обязательные часы(практика)]
+FROM Преподаватель;
+
+INSERT INTO Graph_discipline (id, Название)
+SELECT ID, Название
+FROM Дисциплина;
+
+INSERT INTO Graph_specialization (id, Название)
+SELECT ID, Название
+FROM Специальность;
+
+INSERT INTO Graph_lesson_type (id, Название)
+SELECT ID, Название
+FROM Тип_занятия;
+
+INSERT INTO Graph_assessment_type (id, Название)
+SELECT ID, Название
+FROM Тип_отчётности;
+
+INSERT INTO Graph_study_plan (id, Курс, Семестр, Учебный_год, Часы_лекций, Часы_практик)
+SELECT ID, Курс, Семестр, [Учебный год], [Часы лекций], [Часы практик]
+FROM Учебный_план;
+
+INSERT INTO Graph_load (id, Назначенные_часы)
+SELECT ID, [Назначенные часы]
+FROM Нагрузка;
+GO
+
+
+INSERT INTO CAN_TEACH ($from_id, $to_id)
+SELECT t.$node_id, d.$node_id
+FROM Graph_teacher t
+JOIN Graph_discipline d ON EXISTS (
+    SELECT 1 FROM Преподаватель_Дисциплина pd
+    WHERE pd.Преподаватель_ID = t.id AND pd.Дисциплина_ID = d.id
+);
+
+
+INSERT INTO RELATED_TO_SPECIALTY ($from_id, $to_id)
+SELECT d.$node_id, s.$node_id
+FROM Graph_discipline d
+JOIN Graph_specialization s ON EXISTS (
+    SELECT 1 FROM Дисциплина_Специальность ds
+    WHERE ds.Дисциплина_ID = d.id AND ds.Специальность_ID = s.id
+);
+
+
+INSERT INTO ASSIGNED_TO_TEACHER ($from_id, $to_id)
+SELECT l.$node_id, t.$node_id
+FROM Graph_load l
+JOIN Graph_teacher t ON EXISTS (
+    SELECT 1 FROM Нагрузка n
+    WHERE n.ID = l.id AND n.Преподаватель_ID = t.id
+);
+
+
+INSERT INTO CONTAINS_DISCIPLINE ($from_id, $to_id)
+SELECT l.$node_id, d.$node_id
+FROM Graph_load l
+JOIN Graph_discipline d ON EXISTS (
+    SELECT 1 FROM Нагрузка n
+    JOIN Учебный_план up ON n.Учебный_план_ID = up.ID
+    WHERE n.ID = l.id AND up.Дисциплина_ID = d.id
+);
+
+
+INSERT INTO INCLUDES_SPECIALTY ($from_id, $to_id)
+SELECT sp.$node_id, s.$node_id
+FROM Graph_study_plan sp
+JOIN Graph_specialization s ON EXISTS (
+    SELECT 1 FROM Учебный_план up
+    WHERE up.ID = sp.id AND up.Специальность_ID = s.id
+);
+
+
+INSERT INTO HAS_LESSON_TYPE ($from_id, $to_id)
+SELECT l.$node_id, lt.$node_id
+FROM Graph_load l
+JOIN Graph_lesson_type lt ON EXISTS (
+    SELECT 1 FROM Нагрузка n
+    WHERE n.ID = l.id AND n.Тип_занятия_ID = lt.id
+);
+
+
+INSERT INTO HAS_ASSESSMENT_TYPE ($from_id, $to_id)
+SELECT sp.$node_id, at.$node_id
+FROM Graph_study_plan sp
+JOIN Graph_assessment_type at ON EXISTS (
+    SELECT 1 FROM Учебный_план up
+    WHERE up.ID = sp.id AND up.Тип_отчётности_ID = at.id
+);
+
+
+INSERT INTO BELONGS_TO_STUDY_PLAN ($from_id, $to_id)
+SELECT l.$node_id, sp.$node_id
+FROM Graph_load l
+JOIN Graph_study_plan sp ON EXISTS (
+    SELECT 1 FROM Нагрузка n
+    WHERE n.ID = l.id AND n.Учебный_план_ID = sp.id
+);
+GO
 ```
-
-
