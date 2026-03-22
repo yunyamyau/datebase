@@ -646,7 +646,7 @@ SELECT 'Сеанс 1: Результат после COMMIT' AS Ситуация,
        [Обязательные часы(практика)] AS Обязательные_часы_практики
 FROM Преподаватель
 WHERE ФИО = 'Смирнова Анна Михайловна';
-
+```
 ```
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
