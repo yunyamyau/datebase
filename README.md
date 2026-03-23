@@ -980,7 +980,7 @@ COMMIT TRANSACTION;
 
 
 
-
+<a id="lab8"></a>
 # Лабараторная №8
 [Назад](#content)
 
