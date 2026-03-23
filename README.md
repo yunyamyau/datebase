@@ -750,6 +750,7 @@ FROM Преподаватель
 WHERE ФИО = 'Смирнова Анна Михайловна';
 
 ```
+```
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 WAITFOR DELAY '00:00:02';
@@ -780,5 +781,5 @@ REPEATABLE READ.
 ```
 ```
 ```
-```
+
 
